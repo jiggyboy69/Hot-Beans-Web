@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hot Beans Web</title>
+  <link rel="stylesheet" type="text/css" href="web1.css">
+  <style>
+    #compatibility-warning {
+      background-color: #ffdddd;
+      padding: 10px;
+      display: none;
+      margin-bottom: 15px;
+      text-align: center;
+      font-weight: bold;
+    }
+    @supports (display: grid) {
+    }
+    @supports not (display: grid) {
+      #compatibility-warning {
+        background-color: #ffeeee;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="compatibility-warning">
+    Your browser may not support all the advanced features of this site.
+    For the best experience, please consider updating your browser.
+  </div>
+  <header>
+      <img src="hot-beans-web.png" width="100" class="logo" alt="Hot Beans Web">
+      <h1>Hot Beans Web</h1>
+  </header>
+  <nav>
+    <ul>
+        <li><a href="index.html" onclick="alert('Home');">Home</a></li>
+        <li><a href="web2.html" onclick="alert('Our Team');">Our Team</a></li>
+        <li><a href="web3.html" onclick="alert('Apply Now');">Apply Now</a></li>
+        <li><a href="web4.html" onclick="alert('Courses');">Courses</a></li>
+        <li><a href="web5.html" onclick="alert('Qualifications');">Qualifications</a></li>
+      </ul>
+  </nav>
+  <section>
+      <h2>Home</h2>
+      <div class="image-text">
+          <img src="bteam.jpeg" alt="team 2" class="team-image">
+          <div class="text-content">
+              <p>Join our web development team!</p>
+              <p>We are a web development company looking to recruit people who have</p>
+              <p>completed training courses and have qualifications in web development.</p>
+              <p>In this field we expect you to create websites following our clients'</p>
+              <p>instructions.</p>
+          </div>
+      </div>
+      <div class="trophy">
+          <img src="bteam2.png" alt="trophy" class="team2-image">
+          <p>In order to join our team you must</p>
+          <p>have a level 6 degree in web development</p>
+      </div>
+  </section>
+  
+  <script>
+    function detectBrowser() {
+      const userAgent = navigator.userAgent;
+      let browserMessage;
+      if (/chrome|chromium|crios/i.test(userAgent)) {
+        browserMessage = "You are using Chrome, which is supported!";
+      } else {
+        browserMessage = "Please use Chrome for better performance!";
+      }
+      alert(browserMessage);
+      console.log("Detected Browser:", browserMessage);
+      return browserMessage;
+    }
+  
+    function checkFeatures() {
+      const supportsFlex = (CSS && CSS.supports && CSS.supports('display', 'flex')) || false;
+      const supportsGrid = (CSS && CSS.supports && CSS.supports('display', 'grid')) || false;
+      console.log("Supports Flexbox:", supportsFlex, "Supports Grid:", supportsGrid);
+      if (!supportsFlex || !supportsGrid) {
+        document.getElementById('compatibility-warning').style.display = 'block';
+      }
+    }
+  
+    document.addEventListener("DOMContentLoaded", function() {
+      detectBrowser();
+      checkFeatures();
+    });
+  </script>
+</body>
+</html>

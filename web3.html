@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hot Beans Web</title>
+  <link rel="stylesheet" type="text/css" href="web3.css">
+</head>
+<body>
+  <header>
+    <img src="hot-beans-web.png" width="100" class="logo" alt="Hot Beans Web">
+    <h1>Hot Beans Web</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="index.html" onclick="alert('Home');">Home</a></li>
+      <li><a href="web2.html" onclick="alert('Our Team');">Our Team</a></li>
+      <li><a href="web3.html" onclick="alert('Apply Now');">Apply Now</a></li>
+      <li><a href="web4.html" onclick="alert('Courses');">Courses</a></li>
+      <li><a href="web5.html" onclick="alert('Qualifications');">Qualifications</a></li>
+    </ul>
+  </nav>
+  <section>
+    <h2>Apply Now</h2>
+    <div class="form">
+      <div class="application-form">
+        <h3>Application Form</h3>
+        <form id="application-form" onsubmit="validateAndSubmit(event);">
+          <label for="name">Full Name:</label>
+          <input type="text" id="name" name="name" required>
+          
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+          
+          <label for="phone">Phone Number:</label>
+          <input type="tel" id="phone" name="phone" required>
+          
+          <label for="dob">Date of Birth:</label>
+          <input type="date" id="dob" name="dob" required>
+          
+          <label for="cv">Upload CV:</label>
+          <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required>
+          
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
+          
+          <button type="submit">Submit</button>
+        </form>                
+      </div>
+      <div class="login-form">
+        <form>
+          <p>Remember a Level 6 Degree is needed</p>
+          <p>for a position in this company</p>
+          <p>we are looking for future prospects</p>
+          <p>mainly students who graduated from</p>
+          <p>university and are looking for a job</p>
+          <p>----------------------------------------</p>
+          <p>We will not take any qualification that</p>
+          <p>is lower or higher than a level 6 degree</p>
+          <img src="application.jpg" alt="application" class="application" width="400">
+        </form>
+      </div>
+    </div>
+  </section>
+  
+  <script>
+    function validateAndSubmit(event) {
+      event.preventDefault();
+      const nameInput = document.getElementById('name').value.trim();
+      const emailInput = document.getElementById('email').value.trim();
+      const phoneInput = document.getElementById('phone').value.trim();
+      const dobInput = document.getElementById('dob').value;
+      const messageInput = document.getElementById('message').value.trim();
+      const fileInput = document.getElementById('cv').files[0];
+      
+      if (nameInput.length < 2) {
+        alert("Please enter a valid full name.");
+        return;
+      }
+      
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(emailInput)) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+      
+      const phonePattern = /^[0-9\s\-()+]+$/;
+      if (!phonePattern.test(phoneInput)) {
+        alert("Please enter a valid phone number.");
+        return;
+      }
+      
+      if (!dobInput || new Date(dobInput) >= new Date()) {
+        alert("Please enter a valid date of birth.");
+        return;
+      }
+      
+      if (messageInput.length < 5) {
+        alert("Please enter a message with at least 5 characters.");
+        return;
+      }
+      
+      if (!fileInput) {
+        alert("Please upload your CV.");
+        return;
+      } else {
+        const allowedExtensions = /(\.pdf|\.doc|\.docx)$/i;
+        if (!allowedExtensions.exec(fileInput.name)) {
+          alert("Invalid file format. Only PDF, DOC, or DOCX files are allowed.");
+          return;
+        }
+      }
+      
+      if (!confirm("Are you sure you want to submit?")) {
+        return;
+      }
+      
+      alert("Form submitted successfully!");
+      document.getElementById('application-form').reset();
+    }
+  </script>
+</body>
+</html>
